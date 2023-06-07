@@ -136,7 +136,7 @@ def multipoly_agg(gdf):
         log.error('GeoDataFrame invalid; contains non-polygon geometries')
         return None
     # multipolygons are collections of polygons; extract & concatenate into list
-    mp = [poly for multipoly in gdf_mp['geometry'] for poly in multipoly]
+    mp = [poly for multipoly in gdf_mp['geometry'] for poly in multipoly.geoms]
     p = list(gdf_p['geometry']) # concatenate single polygons into a list
     multipoly = sh.geometry.MultiPolygon(mp + p)  # join lists & convert to single mp
     return multipoly
